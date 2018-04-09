@@ -17,7 +17,7 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x*=dt;
+    this.x+=dt;
 };
 
 // Draw the enemy on the screen, required method for game
@@ -28,16 +28,13 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function(sprite, xpos, ypos ){
+var Player = function(){
     this.sprite = 'images/char-boy.png';
-    this.xpos = xpos;
-    this.ypos = ypos;
+    this.xpos = 200;
+    this.ypos = 450;
 };
 
-Player.prototype.update = function(dt){
-    //TODO
-    this.xpos*=dt;
-    this.ypos*=dt;
+Player.prototype.update = function(){
 };
 
 Player.prototype.render = function(){
@@ -69,14 +66,16 @@ Player.prototype.handleInput = function(arrowKeys){
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 //const allEnemies = Object.keys(Enemy).map(i => Enemy[i]);
-
+const player = new Player();
 const allEnemies = [];
-enemy1 = new Enemy('images/enemy-bug.png',0,300);
+enemy1 = new Enemy('images/enemy-bug.png',0,60);
 allEnemies.push(enemy1);
-enemy2 = new Enemy('images/enemy-bug.png',0,450);
+enemy2 = new Enemy('images/enemy-bug.png',0,150);
 allEnemies.push(enemy2);
+enemy3 = new Enemy('images/enemy-bug.png',0,240);
+allEnemies.push(enemy3);
 
-const player = new Player('images/char-boy.png',0,150);
+
 
 
 
