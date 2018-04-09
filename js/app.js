@@ -1,5 +1,5 @@
 // Enemies our player must avoid
-var Enemy = function() {
+var Enemy = function(sprite = 'images/enemy-bug.png', x, y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -11,11 +11,13 @@ var Enemy = function() {
 };
 
 // Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
+// Parameter: dt, a time delta between tick of the clock
+// dt = (now -last time)/1000 milliseconds
 Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    this.x*=dt;
 };
 
 // Draw the enemy on the screen, required method for game
@@ -26,33 +28,38 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function(){
+var Player = function(sprite, xpos, ypos ){
     this.sprite = 'images/char-boy.png';
+    this.xpos = xpos;
+    this.ypos = ypos;
 };
 
 Player.prototype.update = function(dt){
     //TODO
+    this.xpos*=dt;
+    this.ypos*=dt;
 };
 
 Player.prototype.render = function(){
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    ctx.drawImage(Resources.get(this.sprite), this.xpos, this.ypos);
 }
 
-Player.prototype.handleInput = function(keyCode){
-    switch(keyCode) {
-        case 37:
-            console.log('left arrow key pressed');
+Player.prototype.handleInput = function(arrowKeys){
+    switch(arrowKeys) {
+        case 'left':
+            alert('left');
             break;
-        case 38:
-            console.log('up arrow key pressed');
+        case 'up':
+            alert('up');
             break;
-        case 39:
-            console.log('right arrow key pressed');
+        case 'right':
+            alert('right');            
             break;
-        case 40:
-            console.log('down arrow key pressed');
+        case 'down':
+            alert('down');
             break;            
         default:
+           // alert("key not recognized")
             break;
     }
     
@@ -61,8 +68,15 @@ Player.prototype.handleInput = function(keyCode){
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-const allEnemies = Object.keys(Enemy).map(i => Enemy[i]);
-const player = new Player(0,0);
+//const allEnemies = Object.keys(Enemy).map(i => Enemy[i]);
+
+const allEnemies = [];
+enemy1 = new Enemy('images/enemy-bug.png',0,300);
+allEnemies.push(enemy1);
+enemy2 = new Enemy('images/enemy-bug.png',0,450);
+allEnemies.push(enemy2);
+
+const player = new Player('images/char-boy.png',0,150);
 
 
 
