@@ -17,7 +17,9 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    this.x+=dt;
+    if(this.x < 606)
+    this.x = this.x + (101*dt);
+    else this.x = 0;
 };
 
 // Draw the enemy on the screen, required method for game
@@ -42,21 +44,53 @@ Player.prototype.render = function(){
 }
 
 Player.prototype.handleInput = function(arrowKeys){
+    const canvass_width = 400;
+    const canvass_height = 533;
+    const col = 101;
+    const row = 83;
     switch(arrowKeys) {
+
         case 'left':
-            alert('left');
+            if(this.xpos <= 0){
+                this.ypos = this.ypos;
+                this.xpos = col;                
+            }
+            this.xpos = this.xpos - col;
+            this.ypox = this.ypos;   
             break;
+
         case 'up':
-            alert('up');
-            break;
+            if(this.ypos <= 0){
+               // alert("You reached 0 position; you are on top");
+                this.ypos = canvass_height;
+                this.xpos = canvass_width/2;
+            }       
+            this.xpos = this.xpos;
+            this.ypos = this.ypos - row;           
+            break;    
+
         case 'right':
-            alert('right');            
+            if(this.xpos >= canvass_width){
+                this.ypos = this.ypos;
+                this.xpos = canvass_width-col;                
+            }
+            this.xpos = this.xpos + col;
+            this.ypox = this.ypos;
             break;
+
         case 'down':
-            alert('down');
-            break;            
+            if(this.ypos >= (canvass_height-row)){
+    //        alert('your current ypos: ' + this.ypos);
+               this.xpos = this.xpos;
+               this.ypos = 450;
+               break;
+            }
+            this.xpos = this.xpos;
+            this.ypos = this.ypos + row;
+            //alert('your current ypos: ' + this.ypos);
+            break;    
+
         default:
-           // alert("key not recognized")
             break;
     }
     
@@ -74,10 +108,6 @@ enemy2 = new Enemy('images/enemy-bug.png',0,150);
 allEnemies.push(enemy2);
 enemy3 = new Enemy('images/enemy-bug.png',0,240);
 allEnemies.push(enemy3);
-
-
-
-
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
