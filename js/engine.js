@@ -18,28 +18,30 @@ var Engine = (function(global) {
      * create the canvas element, grab the 2D context for that canvas
      * set the canvas elements height/width and add it to the DOM.
      */
-    var doc = global.document,
-        win = global.window,
-        canvas = doc.createElement('canvas'),
-        ctx = canvas.getContext('2d'),
-        lastTime;
+    var doc = global.document, win = global.window, canvas = doc.createElement('canvas'),
+        ctx = canvas.getContext('2d'), lastTime;
 
     canvas.width = 505;
     canvas.height = 606;
     doc.body.appendChild(canvas);
 
+    var counter = 0;
+
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
      */
-    function main() {
+     function main() {
+
+        counter++; 
+        console.log('counter is : '+counter);
+       // if (counter >=3) return;
         /* Get our time delta information which is required if your game
          * requires smooth animation. Because everyone's computer processes
          * instructions at different speeds we need a constant value that
          * would be the same for everyone (regardless of how fast their
          * computer is) - hurray time!
          */
-        var now = Date.now(),
-            dt = (now - lastTime) / 1000.0;
+        var now = Date.now(), dt = (now - lastTime) / 1000.0;
 
         /* Call our update/render functions, pass along the time delta to
          * our update function since it may be used for smooth animation.
@@ -182,4 +184,4 @@ var Engine = (function(global) {
      * from within their app.js files.
      */
     global.ctx = ctx;
-})(this);
+} )(this);
