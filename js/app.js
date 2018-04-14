@@ -17,28 +17,28 @@ Enemy.prototype.update = function (dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    let randomVar = Math.random()
-    let scaledRandomVar = randomVar * 10 + 1;
-    let seed = Math.floor(scaledRandomVar);
-    let speed = 50 * seed;
-    console.log("before this.x= " + this.x);
-    if (this.x < 606) this.x = this.x + (dt * speed);
+    speedStart = speedFactor();
+    console.log("Speed start: " + speedStart);
+    if (this.x < 606) this.x = this.x + (dt * speedStart);
     else this.x = 0;
-    randomVar = Math.random();
-
-    console.log("dt=" + dt);
-    console.log("randomVar=" + randomVar);
-    console.log("scaledRandomVar=" + scaledRandomVar);
-    console.log("seed=" + seed);
-    console.log("speed=" + speed);
-    console.log("after this.x=" + this.x);
-    console.log('*****************************')
 
     if (this.x == 0) {
+        speedAfterNewY = speedFactor();
         this.y = chooseRandomRow();
+        this.x = this.x +(dt*speedAfterNewY);
+        console.log("Speed New: " + speedAfterNewY )
     }
 };
 
+
+//return 1 to 3 (normal, fast, fastest)
+const speedFactor = function(){
+    let randomVar = Math.random();
+    let scaledRandomVar = randomVar * 9 + 1;
+    let seed = Math.floor(scaledRandomVar);
+    let speed = 101 * seed;
+    return speed
+}
 
 const chooseRandomRow = function (){
     const enemyRow = [60, 150, 240];
@@ -123,10 +123,9 @@ Player.prototype.handleInput = function (arrowKeys) {
 //const allEnemies = Object.keys(Enemy).map(i => Enemy[i]);
 const player = new Player();
 const allEnemies = [];
-const enemyRow = [60, 150, 240];
 
 let i = 0;
-while (i < 3) {
+while (i < 4) {
     let row = chooseRandomRow();
    
     switch (i) {
@@ -134,10 +133,10 @@ while (i < 3) {
             allEnemies.push(new Enemy('images/enemy-bug.png', 0, row));
             break
         case 1:
-            allEnemies.push(new Enemy('images/char-boy.png', 0, row));
+            allEnemies.push(new Enemy('images/enemy-bug.png', 0, row));
             break
         default:
-            allEnemies.push(new Enemy('images/char-boy.png', 0, row));
+            allEnemies.push(new Enemy('images/enemy-bug.png', 0, row));
             break
     }
     i++;

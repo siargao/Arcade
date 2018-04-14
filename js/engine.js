@@ -32,9 +32,9 @@ var Engine = (function(global) {
      */
      function main() {
 
-        counter++; 
+        //counter++; 
         console.log('counter is : '+counter);
-       // if (counter >=3) return;
+        if (counter >=10) alert("Counter " + i);
         /* Get our time delta information which is required if your game
          * requires smooth animation. Because everyone's computer processes
          * instructions at different speeds we need a constant value that
